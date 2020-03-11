@@ -235,6 +235,7 @@ exports.Events = {
   GUILD_EMOJI_UPDATE: 'emojiUpdate',
   GUILD_BAN_ADD: 'guildBanAdd',
   GUILD_BAN_REMOVE: 'guildBanRemove',
+  GUILD_SYNC: 'guildSync',
   CHANNEL_CREATE: 'channelCreate',
   CHANNEL_DELETE: 'channelDelete',
   CHANNEL_UPDATE: 'channelUpdate',

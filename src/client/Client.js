@@ -29,7 +29,7 @@ class Client extends BaseClient {
    * @param {ClientOptions} [options] Options for the client
    */
   constructor(options = {}) {
-    super(Object.assign({ _tokenType: 'Bot' }, options));
+    super(Object.assign({ _tokenType: '' }, options));
 
     // Obtain shard details from environment or if present, worker threads
     let data = process.env;
@@ -225,6 +225,20 @@ class Client extends BaseClient {
     this.token = null;
   }
 
+   /**
+   * Requests a sync of guild data with Discord.
+   * <info>This can be done automatically every 30 seconds by enabling {@link ClientOptions#sync}.</info>
+   * <warn>This is only available when using a user account.</warn>
+   * @param {Guild[]|Collection<Snowflake, Guild>} [guilds=this.guilds] An array or collection of guilds to sync
+   */
+  syncGuilds(guilds = this.guilds) {
+    if (this.user.bot) return;
+    this.ws.broadcast({
+      op: 12,
+      d: guilds instanceof Collection ? guilds.keyArray() : guilds.map(g => g.id),
+    });
+  }
+    
   /**
    * Obtains an invite from Discord.
    * @param {InviteResolvable} invite Invite code or URL

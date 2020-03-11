@@ -45,7 +45,7 @@ class APIRequest {
       body = JSON.stringify(this.options.data);
       headers['Content-Type'] = 'application/json';
     }
-
+//console.log(headers);
     return fetch(url, {
       method: this.method,
       headers,
